@@ -49,8 +49,13 @@
 
 html {
   scroll-behavior: smooth;
+  /* Lock the viewport width — prevents any element from
+     causing the page to be wider than the screen */
+  overflow-x: hidden;
   /* Prevent iOS font size inflation on orientation change */
   -webkit-text-size-adjust: 100%;
+  /* Android equivalent */
+  text-size-adjust: 100%;
 }
 
 body {
@@ -61,14 +66,16 @@ body {
   background-color: var(--color-cream);
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
-  /* Prevent horizontal scroll on mobile */
+  /* Belt-and-braces: clip body too */
   overflow-x: hidden;
+  /* Ensure body never exceeds viewport width */
+  width: 100%;
+  max-width: 100vw;
 }
 
 a {
   text-decoration: none;
   color: inherit;
-  /* Ensure tap targets are comfortable */
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -78,16 +85,17 @@ a {
 .hero {
   background: var(--color-white);
   border-bottom: 1px solid var(--color-border);
-  /* Mobile: tighter padding */
   padding: 2rem 1.25rem 1.75rem;
   text-align: center;
+  /* Contain any overflow within hero */
+  overflow: hidden;
 }
 
 .hero-eyebrow {
   font-family: var(--font-body);
   font-weight: 300;
   font-size: 10px;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-gold-deep);
   margin-bottom: 0.75rem;
@@ -96,7 +104,6 @@ a {
 .hero-title {
   font-family: var(--font-display);
   font-weight: 300;
-  /* Mobile: comfortable large but not oversized */
   font-size: 38px;
   line-height: 1.1;
   color: var(--color-ink);
@@ -113,9 +120,10 @@ a {
   font-family: var(--font-body);
   font-weight: 300;
   font-size: 13px;
-  letter-spacing: 0.05em;
+  /* Reduced letter-spacing — large values on wide text push
+     the last character beyond the container on Android */
+  letter-spacing: 0.03em;
   color: var(--color-ink-soft);
-  /* Mobile: full width, no max-width constraint */
   max-width: 100%;
   margin: 0 auto 1.5rem;
   line-height: 1.8;
@@ -140,7 +148,6 @@ a {
   color: var(--color-gold);
 }
 
-/* Tablet and up */
 @media (min-width: 600px) {
   .hero {
     padding: 3rem 2rem 2.5rem;
@@ -172,17 +179,18 @@ a {
 .nav-filter {
   background: var(--color-white);
   border-bottom: 1px solid var(--color-border);
-  /* Mobile: scroll horizontally, left-aligned so first item is visible */
   display: flex;
   justify-content: flex-start;
+  /* The nav intentionally scrolls horizontally — it is
+     self-contained and does not affect page width */
   overflow-x: auto;
-  /* Hide scrollbar on mobile for cleaner look */
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   padding: 0;
   gap: 0;
-  /* Prevent nav from collapsing */
   flex-shrink: 0;
+  /* Contain the scroll within the nav only */
+  width: 100%;
 }
 
 .nav-filter::-webkit-scrollbar {
@@ -193,11 +201,11 @@ a {
   font-family: var(--font-body);
   font-weight: 400;
   font-size: 11px;
-  letter-spacing: 0.12em;
+  /* Reduced letter-spacing avoids overflow on Samsung */
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-ink-soft);
-  /* Mobile: taller tap target (min 44px), tighter horizontal spacing */
-  padding: 0.875rem 1rem;
+  padding: 0.875rem 0.9rem;
   min-height: 44px;
   border: none;
   border-bottom: 2px solid transparent;
@@ -205,7 +213,6 @@ a {
   cursor: pointer;
   white-space: nowrap;
   transition: color var(--transition-base), border-bottom-color var(--transition-base);
-  /* Remove default button appearance on iOS */
   -webkit-appearance: none;
 }
 
@@ -220,7 +227,6 @@ a {
   font-weight: 500;
 }
 
-/* Tablet and up: centre-align tabs with more breathing room */
 @media (min-width: 600px) {
   .nav-filter {
     justify-content: center;
@@ -238,49 +244,60 @@ a {
 /* ── 5. SECTIONS ──────────────────────────────────────────── */
 
 .section {
-  /* Mobile base */
   padding: var(--space-section-v) var(--space-section-h);
+  /* Prevent any child from bleeding out */
+  overflow: hidden;
 }
 
 .section-header {
   display: flex;
   align-items: baseline;
-  gap: 12px;
+  gap: 10px;
   margin-bottom: 1.25rem;
+  /* Allow header to wrap rather than push width on narrow screens */
+  flex-wrap: nowrap;
+  width: 100%;
+  min-width: 0;
 }
 
 .section-eyebrow {
   font-family: var(--font-body);
   font-weight: 300;
   font-size: 9px;
-  letter-spacing: 0.35em;
+  /* Conservative letter-spacing to avoid overflow */
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-gold-deep);
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .section-title {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: 24px;
+  font-size: 22px;
   color: var(--color-ink);
   letter-spacing: 0.01em;
+  /* Allow title to truncate rather than overflow */
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .section-line {
   flex: 1;
   height: 0.5px;
   background: var(--color-border);
-  /* Prevent collapse */
-  min-width: 12px;
+  min-width: 8px;
+  flex-shrink: 1;
 }
 
 .skincare-section {
   background: var(--color-gold-light);
 }
 
-/* Tablet and up */
 @media (min-width: 600px) {
   :root {
     --space-section-v: 3rem;
@@ -299,6 +316,9 @@ a {
 
   .section-title {
     font-size: 28px;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
   }
 }
 
@@ -307,11 +327,13 @@ a {
 
 .brands-grid {
   display: grid;
-  /* Mobile: 2 equal columns — enough to browse comfortably */
   grid-template-columns: repeat(2, 1fr);
   gap: 1px;
   background: var(--color-border);
   border: 1px solid var(--color-border);
+  /* Prevent grid from exceeding its container */
+  width: 100%;
+  min-width: 0;
 }
 
 .brand-card {
@@ -319,17 +341,18 @@ a {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  /* Mobile: compact padding, generous enough to tap */
   padding: 1.25rem 1rem 1rem;
   min-height: 44px;
   background: var(--color-white);
+  /* Clip any text overflow within the card */
   overflow: hidden;
   transition: background var(--transition-base);
-  /* Ensure whole card is tappable */
   -webkit-tap-highlight-color: transparent;
+  /* Prevent card from exceeding grid cell */
+  min-width: 0;
+  width: 100%;
 }
 
-/* Rose underline accent — visible on tap (active) on mobile */
 .brand-card::after {
   content: '';
   position: absolute;
@@ -352,14 +375,12 @@ a {
   transform: scaleX(1);
 }
 
-/* Link icon: always visible on mobile (no hover state) */
 .brand-link-icon {
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
   font-size: 13px;
   color: var(--color-border-strong);
-  /* Always show on mobile — no hover available */
   opacity: 1;
   transition: opacity var(--transition-base);
 }
@@ -367,7 +388,6 @@ a {
 .brand-initial {
   font-family: var(--font-display);
   font-weight: 300;
-  /* Mobile: slightly smaller */
   font-size: 30px;
   line-height: 1;
   color: var(--color-gold);
@@ -378,9 +398,14 @@ a {
   font-family: var(--font-body);
   font-weight: 500;
   font-size: 12px;
-  letter-spacing: 0.06em;
+  /* Reduced letter-spacing — critical fix for Samsung overflow */
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--color-ink);
+  /* Clip long brand names cleanly */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .brand-tagline {
@@ -389,18 +414,23 @@ a {
   font-size: 11px;
   color: var(--color-ink-soft);
   line-height: 1.5;
+  /* Allow tagline to wrap naturally rather than push width */
+  white-space: normal;
+  word-break: break-word;
 }
 
 .brand-category {
   margin-top: auto;
   padding-top: 6px;
   font-size: 9px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-gold-deep);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Tablet: 3 columns */
 @media (min-width: 600px) {
   .brands-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -413,7 +443,6 @@ a {
 
   .brand-link-icon {
     font-size: 14px;
-    /* Revert to hover-only on non-touch */
     opacity: 0;
   }
 
@@ -442,7 +471,6 @@ a {
   }
 }
 
-/* Desktop: 4+ columns via auto-fill */
 @media (min-width: 960px) {
   .brands-grid {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -455,6 +483,7 @@ a {
 .spotlight-section {
   background: var(--color-ink);
   padding: var(--space-section-v) var(--space-section-h);
+  overflow: hidden;
 }
 
 .spotlight-section .section-title {
@@ -471,7 +500,6 @@ a {
 
 .spotlight-card {
   display: flex;
-  /* Mobile: stacked vertically */
   flex-direction: column;
   gap: 1rem;
   padding: 1.5rem;
@@ -479,6 +507,9 @@ a {
   border: 1px solid rgba(196, 168, 130, 0.2);
   transition: background var(--transition-base);
   -webkit-tap-highlight-color: transparent;
+  /* Prevent card exceeding container */
+  width: 100%;
+  overflow: hidden;
 }
 
 .spotlight-card:hover,
@@ -496,17 +527,20 @@ a {
 .spotlight-initial {
   font-family: var(--font-display);
   font-weight: 300;
-  /* Mobile: smaller decorative initial */
   font-size: 48px;
   line-height: 1;
   color: var(--color-gold);
+}
+
+.spotlight-info {
+  min-width: 0;
 }
 
 .spotlight-by {
   font-family: var(--font-body);
   font-weight: 300;
   font-size: 11px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--color-gold);
   margin-bottom: 4px;
@@ -527,24 +561,23 @@ a {
   font-size: 13px;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.6);
+  word-break: break-word;
 }
 
 .spotlight-cta {
   font-family: var(--font-body);
   font-weight: 400;
   font-size: 10px;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-gold);
   border: 1px solid rgba(196, 168, 130, 0.4);
-  /* Mobile: full-width button for easy tapping */
   display: block;
   text-align: center;
   padding: 14px 20px;
   transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base);
 }
 
-/* Tablet and up: horizontal card layout */
 @media (min-width: 600px) {
   .spotlight-card {
     display: grid;
@@ -578,15 +611,16 @@ a {
 .footer-strip {
   background: var(--color-white);
   border-top: 1px solid var(--color-border);
-  /* Mobile: generous padding for breathing room */
   padding: 1.5rem 1.25rem;
   text-align: center;
   font-family: var(--font-body);
   font-weight: 300;
   font-size: 10px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   color: var(--color-ink-soft);
   line-height: 1.8;
+  /* Footer text can wrap — never push width */
+  word-break: break-word;
 }
 
 .footer-strip a {
@@ -608,7 +642,6 @@ a {
   display: none !important;
 }
 
-/* Accessible focus ring — keyboard navigation */
 :focus-visible {
   outline: 2px solid var(--color-rose-dark);
   outline-offset: 2px;

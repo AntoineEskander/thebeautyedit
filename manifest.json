@@ -1,0 +1,17 @@
+{
+  "name": "The Beauty Edit",
+  "short_name": "Beauty Edit",
+  "description": "California's curated one-stop hub for the world's finest makeup and skincare brands.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FAF7F4",
+  "theme_color": "#1A1411",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
