@@ -646,3 +646,213 @@ a {
   outline: 2px solid var(--color-rose-dark);
   outline-offset: 2px;
 }
+
+
+/* ── 10. PROMOTIONS SECTION ───────────────────────────────── */
+
+.promotions-section {
+  background: var(--color-white);
+  padding: var(--space-section-v) var(--space-section-h);
+  border-top: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.promos-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+  width: 100%;
+}
+
+/* Featured promotion — full width, dark editorial card */
+.promo-card {
+  background: var(--color-white);
+  padding: 1.125rem 1rem 1rem;
+  border-left: 3px solid transparent;
+  transition: background var(--transition-base), border-color var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-decoration: none;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+  min-width: 0;
+  width: 100%;
+}
+
+.promo-card:hover,
+.promo-card:active {
+  background: var(--color-rose-light);
+  border-left-color: var(--color-rose);
+}
+
+.promo-card--featured {
+  background: var(--color-ink);
+  border-left-color: var(--color-gold);
+  padding: 1.5rem 1.25rem;
+  grid-column: 1 / -1;
+}
+
+.promo-card--featured:hover,
+.promo-card--featured:active {
+  background: var(--color-ink-mid);
+  border-left-color: var(--color-gold);
+}
+
+.promo-type {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold-deep);
+  margin-bottom: 2px;
+}
+
+.promo-card--featured .promo-type {
+  color: var(--color-gold);
+}
+
+.promo-brand {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.promo-card--featured .promo-brand {
+  color: var(--color-rose);
+}
+
+.promo-headline {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
+.promo-card--featured .promo-headline {
+  font-size: 22px;
+  font-style: italic;
+  color: var(--color-white);
+}
+
+.promo-desc {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--color-ink-soft);
+  word-break: break-word;
+}
+
+.promo-card--featured .promo-desc {
+  color: rgba(250, 247, 244, 0.6);
+}
+
+.promo-expires {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--color-rose-dark);
+  margin-top: 2px;
+}
+
+.promo-card--featured .promo-expires {
+  color: var(--color-rose);
+}
+
+.promo-cta {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-rose-dark);
+  margin-top: 6px;
+  display: inline-block;
+}
+
+.promo-card--featured .promo-cta {
+  color: var(--color-gold);
+  border: 1px solid rgba(196, 168, 130, 0.35);
+  padding: 8px 16px;
+  margin-top: 10px;
+  transition: background var(--transition-base), color var(--transition-base);
+}
+
+.promo-card--featured:hover .promo-cta,
+.promo-card--featured:active .promo-cta {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+/* Badge on brand cards when brand has a promo */
+.brand-promo-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--color-rose-light);
+  border: 1px solid var(--color-rose);
+  padding: 2px 6px;
+  margin-top: 5px;
+  align-self: flex-start;
+}
+
+.brand-promo-pill span {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-rose-dark);
+}
+
+.brand-promo-pill i {
+  font-size: 10px;
+  color: var(--color-rose-dark);
+}
+
+/* Last updated line */
+.promos-updated {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--color-ink-soft);
+  letter-spacing: 0.08em;
+  margin-top: 0.75rem;
+  text-align: right;
+}
+
+/* Loading state */
+.promos-loading {
+  padding: 2rem;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  color: var(--color-ink-soft);
+  background: var(--color-white);
+}
+
+@media (min-width: 600px) {
+  .promos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .promo-card--featured {
+    grid-column: 1 / -1;
+  }
+
+  .promo-headline {
+    font-size: 20px;
+  }
+
+  .promo-card--featured .promo-headline {
+    font-size: 26px;
+  }
+}

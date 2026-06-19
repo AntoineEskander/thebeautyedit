@@ -49,6 +49,7 @@
     <button class="nav-btn" data-filter="luxury">Accessible Luxury</button>
     <button class="nav-btn" data-filter="skincare">Skincare</button>
     <button class="nav-btn" data-filter="spotlight">Rising Stars</button>
+    <button class="nav-btn" data-filter="promotions">Promotions</button>
   </nav>
 
   <main>
@@ -330,6 +331,20 @@
     </section>
 
   </main>
+
+  <!-- ===================== PROMOTIONS ===================== -->
+  <!-- Data loaded from promotions.json via app.js            -->
+  <section class="promotions-section" id="sec-promotions" data-section="promotions">
+    <div class="section-header">
+      <span class="section-eyebrow">On Now</span>
+      <h2 class="section-title">Promotions</h2>
+      <span class="section-line" aria-hidden="true"></span>
+    </div>
+    <div class="promos-grid" id="promosGrid">
+      <!-- Populated dynamically by app.js -->
+    </div>
+    <p class="promos-updated" id="promosUpdated"></p>
+  </section>
 
   <!-- ===================== FOOTER ===================== -->
   <footer class="footer-strip">
