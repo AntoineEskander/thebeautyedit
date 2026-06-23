@@ -320,7 +320,95 @@ function formatDate(isoDate) {
 }
 
 
-/* ── 4. INIT ──────────────────────────────────────────────── */
+/* ── 4. HIDDEN LAUNCHER ───────────────────────────────────── */
+
+/*
+ * Replace __SECRET_URL__ with the actual destination URL
+ * before going live. This value is never rendered in the UI,
+ * never appears in any link, button, or attribute on the page.
+ *
+ * Desktop trigger : Alt + Shift + E
+ * Mobile trigger  : Two-finger double-tap on designated elements
+ */
+const _h = '__SECRET_URL__';
+
+function _launch() {
+  window.open(_h, '_blank', 'noopener,noreferrer');
+}
+
+function onHotKey(e) {
+  if (e.altKey && e.shiftKey && e.key === 'E') {
+    e.preventDefault();
+    _launch();
+  }
+}
+
+
+/* ── 5. MOBILE GESTURE LAUNCHER ──────────────────────────── */
+
+/*
+ * Trigger: two-finger double-tap where each finger lands on
+ * a specific element simultaneously.
+ *
+ * Finger 1 — element carrying data-secret-finger="1"
+ * Finger 2 — element carrying data-secret-finger="2"
+ *
+ * Both fingers must be down at the same time.
+ * That two-finger touch must happen twice within _TAP_GAP ms.
+ * The active nav filter must be "prestige".
+ *
+ * Uses document.elementFromPoint() to identify which element
+ * each finger is touching — no listeners on the elements themselves.
+ */
+const _TAP_GAP  = 400;   // max ms between the two two-finger taps
+let   _lastTap  = 0;     // timestamp of the previous valid two-finger touch
+
+function _getSecretFinger(touch) {
+  // Returns the data-secret-finger value of the element under this touch point,
+  // or null if the element carries no such attribute.
+  const el = document.elementFromPoint(touch.clientX, touch.clientY);
+  if (!el) return null;
+  // Walk up a couple of levels in case the touch lands on a child node
+  return el.dataset.secretFinger
+    || (el.parentElement && el.parentElement.dataset.secretFinger)
+    || null;
+}
+
+function onGlobalTouchStart(e) {
+  // Must be exactly two fingers
+  if (e.touches.length !== 2) return;
+
+  // Active tab must be "prestige"
+  const activeBtn = document.querySelector('.nav-btn.active');
+  if (!activeBtn || activeBtn.dataset.filter !== 'prestige') return;
+
+  // Identify which secret finger each touch point maps to
+  const fingers = [
+    _getSecretFinger(e.touches[0]),
+    _getSecretFinger(e.touches[1]),
+  ];
+
+  // One finger must be "1" and the other must be "2" (order doesn't matter)
+  const hasOne = fingers.includes('1');
+  const hasTwo = fingers.includes('2');
+  if (!hasOne || !hasTwo) return;
+
+  // Valid two-finger combination — check if this is the second tap
+  const now = Date.now();
+  if (now - _lastTap < _TAP_GAP) {
+    // Second valid tap within the window — fire
+    e.preventDefault();
+    _launch();
+    _lastTap = 0;   // reset so a triple-tap doesn't re-fire
+  } else {
+    // First valid tap — record the time
+    _lastTap = now;
+  }
+}
+
+function registerGestureTriggers() {
+  document.addEventListener('touchstart', onGlobalTouchStart, { passive: false });
+}
 
 function init() {
   // Wire up nav filter buttons
@@ -336,6 +424,12 @@ function init() {
 
   // Load promotions from JSON
   loadPromotions();
+
+  // Register hidden desktop launcher — Alt + Shift + E
+  document.addEventListener('keydown', onHotKey);
+
+  // Register mobile gesture triggers — two-finger double-tap
+  registerGestureTriggers();
 }
 
 document.addEventListener('DOMContentLoaded', init);
