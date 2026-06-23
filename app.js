@@ -48,38 +48,166 @@ function onNavClick(event) {
 }
 
 
-/* ── 2. PROMOTIONS LOADER ─────────────────────────────────── */
-
-/**
- * Fetches promotions.json, renders promotion cards in the
- * promotions section, and badges brand cards where applicable.
+/* ── 2. PROMOTIONS DATA ───────────────────────────────────── */
+/*
+ * Promotions are stored inline here — no fetch required.
+ * Works when the page is opened locally (file://) or hosted.
+ *
+ * TO UPDATE: edit the entries below.
+ * Each entry needs: id, brand, brandKey, featured, type,
+ * headline, description, cta, url, expires (or null), verified.
  */
-async function loadPromotions() {
+
+const PROMOTIONS_DATA = {
+  lastUpdated: '2026-06-20',
+  promotions: [
+    {
+      id:          'ct-001',
+      brand:       'Charlotte Tilbury',
+      brandKey:    'charlottetilbury',
+      featured:    true,
+      type:        'Discount',
+      headline:    '15% off your first order',
+      description: 'Sign up and save 15% on your first Charlotte Tilbury purchase — including Pillow Talk, Hollywood Flawless Filter and more.',
+      cta:         'Shop the offer',
+      url:         'https://www.charlottetilbury.com/us',
+      expires:     null,
+      verified:    '2026-06-20',
+    },
+    {
+      id:          'nars-001',
+      brand:       'NARS',
+      brandKey:    'nars',
+      featured:    false,
+      type:        'Gift with Purchase',
+      headline:    'Free gifts with orders of $75+',
+      description: 'Enter code LIT at checkout to receive free gifts with any order of $75 or more. Valid until 1 July 2026.',
+      cta:         'View offer',
+      url:         'https://www.narscosmetics.com',
+      expires:     '2026-07-01',
+      verified:    '2026-06-20',
+    },
+    {
+      id:          'mac-001',
+      brand:       'MAC Cosmetics',
+      brandKey:    'maccosmetics',
+      featured:    false,
+      type:        'Free Gift',
+      headline:    'Free Lip Gloss Keychain Charm',
+      description: 'Receive a complimentary MAC keychain charm with any select Lipglass purchase. Online only, while supplies last.',
+      cta:         'View offer',
+      url:         'https://www.maccosmetics.com/offer-details',
+      expires:     null,
+      verified:    '2026-06-20',
+    },
+    {
+      id:          'mac-002',
+      brand:       'MAC Cosmetics',
+      brandKey:    'maccosmetics',
+      featured:    false,
+      type:        'Free Shipping',
+      headline:    'Free shipping on orders $35+',
+      description: 'Enjoy complimentary standard shipping on all MAC Cosmetics orders over $35. No code required.',
+      cta:         'Shop now',
+      url:         'https://www.maccosmetics.com/deals',
+      expires:     null,
+      verified:    '2026-06-20',
+    },
+    {
+      id:          'bb-001',
+      brand:       'Bobbi Brown',
+      brandKey:    'bobbibrown',
+      featured:    false,
+      type:        'Discount',
+      headline:    'Save up to 30% on Custom Kits',
+      description: 'Simplify your routine and save up to 30% on Bobbi Brown Custom Kits. Shop the 5-Minute Effortless Beauty collection.',
+      cta:         'View offer',
+      url:         'https://www.bobbibrowncosmetics.com/products/34090/evergreengifting/custom-kit-5-minute-effortless-beauty',
+      expires:     null,
+      verified:    '2026-06-20',
+    },
+    {
+      id:          'bb-002',
+      brand:       'Bobbi Brown',
+      brandKey:    'bobbibrown',
+      featured:    false,
+      type:        'Loyalty Offer',
+      headline:    '15% off your first order',
+      description: 'Join BB Access Rewards and receive 15% off your first order. Free to sign up at Bobbi Brown Cosmetics.',
+      cta:         'Join & save',
+      url:         'https://www.bobbibrowncosmetics.com/account/signin.tmpl?tab=create',
+      expires:     null,
+      verified:    '2026-06-20',
+    },
+    {
+      id:          'ud-001',
+      brand:       'Urban Decay',
+      brandKey:    'urbandecay',
+      featured:    false,
+      type:        'Loyalty Offer',
+      headline:    '15% off your first order',
+      description: 'Sign up for Urban Decay email and text alerts and receive 15% off your first purchase plus free shipping.',
+      cta:         'View offer',
+      url:         'https://www.urbandecay.com',
+      expires:     null,
+      verified:    '2026-06-20',
+    },
+    {
+      id:          'ud-002',
+      brand:       'Urban Decay',
+      brandKey:    'urbandecay',
+      featured:    false,
+      type:        'Free Shipping',
+      headline:    'Free shipping on orders $60+',
+      description: 'Enjoy free standard shipping on all Urban Decay orders over $60. No code required at checkout.',
+      cta:         'Shop now',
+      url:         'https://www.urbandecay.com',
+      expires:     null,
+      verified:    '2026-06-20',
+    },
+    {
+      id:          'de-001',
+      brand:       'Drunk Elephant',
+      brandKey:    'drunkelephant',
+      featured:    false,
+      type:        'Loyalty Offer',
+      headline:    '15% off your first purchase',
+      description: 'Sign up to the Drunk Elephant email list and receive 15% off your first order. Skincare that works, for less.',
+      cta:         'Sign up & save',
+      url:         'https://www.drunkelephant.com',
+      expires:     null,
+      verified:    '2026-06-20',
+    },
+    {
+      id:          'tatcha-001',
+      brand:       'Tatcha',
+      brandKey:    'tatcha',
+      featured:    false,
+      type:        'Discount',
+      headline:    'Up to 25% off at Sephora',
+      description: 'Select Tatcha products including the Dewy Skin Cream are currently discounted at Sephora as part of their Summer Skincare Sale.',
+      cta:         'Shop at Sephora',
+      url:         'https://www.sephora.com/brand/tatcha',
+      expires:     null,
+      verified:    '2026-06-20',
+    },
+  ],
+};
+
+
+/* ── 3. PROMOTIONS RENDERER ───────────────────────────────── */
+
+function loadPromotions() {
   const grid    = document.getElementById('promosGrid');
   const updated = document.getElementById('promosUpdated');
 
   if (!grid) return;
 
-  // Show loading state
-  grid.innerHTML = `<div class="promos-loading">Loading promotions…</div>`;
+  renderPromotionCards(PROMOTIONS_DATA.promotions, grid);
+  badgeBrandCards(PROMOTIONS_DATA.promotions);
 
-  try {
-    const res  = await fetch('./promotions.json');
-    if (!res.ok) throw new Error(`Could not load promotions.json (HTTP ${res.status})`);
-
-    const data = await res.json();
-
-    renderPromotionCards(data.promotions, grid);
-    badgeBrandCards(data.promotions);
-
-    if (updated && data.lastUpdated) {
-      updated.textContent = `Promotions verified ${data.lastUpdated}`;
-    }
-
-  } catch (err) {
-    // Fail silently in production — don't show errors to visitors
-    grid.innerHTML = `<div class="promos-loading">No promotions available at this time.</div>`;
-    console.warn('Beauty Edit — promotions load failed:', err.message);
+  if (updated && PROMOTIONS_DATA.lastUpdated) {
+    updated.textContent = `Promotions verified ${PROMOTIONS_DATA.lastUpdated}`;
   }
 }
 
