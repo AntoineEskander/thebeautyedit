@@ -360,34 +360,20 @@ let   _lastTap = 0;
 const _isIOS = /iP(hone|od|ad)/.test(navigator.userAgent);
 
 function _getSecretFinger(touch) {
-  // Try elementFromPoint first
   let el = document.elementFromPoint(touch.clientX, touch.clientY);
-  const depth = _isIOS ? 5 : 2;
-  for (let i = 0; i < depth; i++) {
+  for (let i = 0; i < 5; i++) {
     if (!el || el === document.body) break;
     if (el.dataset && el.dataset.secretFinger) return el.dataset.secretFinger;
     el = el.parentElement;
-  }
-  // iOS only fallback — icon fonts render via ::before pseudo-element so
-  // elementFromPoint may miss the <i> element entirely on iOS.
-  // Walk up from the touch target as a second attempt.
-  if (_isIOS) {
-    let t = touch.target;
-    for (let i = 0; i < 5; i++) {
-      if (!t || t === document.body) break;
-      if (t.dataset && t.dataset.secretFinger) return t.dataset.secretFinger;
-      t = t.parentElement;
-    }
   }
   return null;
 }
 
 function _registerIOSTouchFix() {
-  // iOS Safari only fires touchstart on interactive elements.
-  // Attaching an empty click listener and cursor:pointer makes any element interactive.
+  // iOS Safari only fires touchstart on non-interactive elements
+  // if they have a click listener attached.
   if (!_isIOS) return;
   document.querySelectorAll('[data-secret-finger]').forEach((el) => {
-    el.style.cursor = 'pointer';
     el.addEventListener('click', function() {});
   });
 }
