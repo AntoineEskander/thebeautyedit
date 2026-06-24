@@ -4,36 +4,38 @@
    Wider layouts are added via min-width breakpoints.
    ============================================================ */
 
+
 /* ── 1. CUSTOM PROPERTIES (Design Tokens) ─────────────────── */
 
 :root {
-  --color-rose: #c9a99a;
-  --color-rose-light: #f5ede9;
-  --color-rose-dark: #8b5e52;
+  --color-rose:          #C9A99A;
+  --color-rose-light:    #F5EDE9;
+  --color-rose-dark:     #8B5E52;
 
-  --color-gold: #c4a882;
-  --color-gold-light: #f3ede3;
-  --color-gold-deep: #9a7b5a;
+  --color-gold:          #C4A882;
+  --color-gold-light:    #F3EDE3;
+  --color-gold-deep:     #9A7B5A;
 
-  --color-ink: #1a1411;
-  --color-ink-mid: #4a3f3a;
-  --color-ink-soft: #7a6f6a;
+  --color-ink:           #1A1411;
+  --color-ink-mid:       #4A3F3A;
+  --color-ink-soft:      #7A6F6A;
 
-  --color-cream: #faf7f4;
-  --color-white: #ffffff;
+  --color-cream:         #FAF7F4;
+  --color-white:         #FFFFFF;
 
-  --color-border: rgba(196, 168, 130, 0.25);
+  --color-border:        rgba(196, 168, 130, 0.25);
   --color-border-strong: rgba(196, 168, 130, 0.5);
 
-  --font-display: "Cormorant Garamond", Georgia, serif;
-  --font-body: "Jost", system-ui, sans-serif;
+  --font-display:        'Cormorant Garamond', Georgia, serif;
+  --font-body:           'Jost', system-ui, sans-serif;
 
-  --transition-base: 0.2s ease;
+  --transition-base:     0.2s ease;
 
   /* Spacing scale — mobile base */
-  --space-section-v: 2rem;
-  --space-section-h: 1rem;
+  --space-section-v:     2rem;
+  --space-section-h:     1rem;
 }
+
 
 /* ── 2. RESET & BASE ──────────────────────────────────────── */
 
@@ -76,6 +78,7 @@ a {
   color: inherit;
   -webkit-tap-highlight-color: transparent;
 }
+
 
 /* ── 3. HERO ──────────────────────────────────────────────── */
 
@@ -170,6 +173,7 @@ a {
   }
 }
 
+
 /* ── 4. NAV FILTER ────────────────────────────────────────── */
 
 .nav-filter {
@@ -206,10 +210,9 @@ a {
   border: none;
   border-bottom: 2px solid transparent;
   background: none;
+  cursor: pointer;
   white-space: nowrap;
-  transition:
-    color var(--transition-base),
-    border-bottom-color var(--transition-base);
+  transition: color var(--transition-base), border-bottom-color var(--transition-base);
   -webkit-appearance: none;
 }
 
@@ -236,6 +239,7 @@ a {
     padding: 1rem 1.5rem;
   }
 }
+
 
 /* ── 5. SECTIONS ──────────────────────────────────────────── */
 
@@ -318,6 +322,7 @@ a {
   }
 }
 
+
 /* ── 6. BRAND GRID & CARDS ────────────────────────────────── */
 
 .brands-grid {
@@ -349,7 +354,7 @@ a {
 }
 
 .brand-card::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   left: 0;
@@ -472,6 +477,7 @@ a {
   }
 }
 
+
 /* ── 7. CELEBRITY SPOTLIGHT ───────────────────────────────── */
 
 .spotlight-section {
@@ -569,10 +575,7 @@ a {
   display: block;
   text-align: center;
   padding: 14px 20px;
-  transition:
-    background var(--transition-base),
-    color var(--transition-base),
-    border-color var(--transition-base);
+  transition: background var(--transition-base), color var(--transition-base), border-color var(--transition-base);
 }
 
 @media (min-width: 600px) {
@@ -601,6 +604,7 @@ a {
     white-space: nowrap;
   }
 }
+
 
 /* ── 8. FOOTER ────────────────────────────────────────────── */
 
@@ -631,16 +635,18 @@ a {
   }
 }
 
+
 /* ── 11. SECRET TRIGGER TAP AREA ──────────────────────────── */
 
 /* Expands the tappable region by 10px in every direction
    with zero visual change — element appearance is unaffected */
 [data-secret-finger="1"] {
   position: relative;
+  cursor: pointer;
 }
 
 [data-secret-finger="1"]::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: -10px;
 }
@@ -648,6 +654,7 @@ a {
 [data-secret-finger="2"] {
   padding: 10px;
   margin: -10px;
+  cursor: pointer;
 }
 
 .hidden {
@@ -659,15 +666,6 @@ a {
   outline-offset: 2px;
 }
 
-@supports (-webkit-touch-callout: none) {
-  [data-secret-finger="1"] {
-    cursor: pointer;
-  }
-
-  [data-secret-finger="2"] {
-    cursor: pointer;
-  }
-}
 
 /* ── 10. PROMOTIONS SECTION ───────────────────────────────── */
 
@@ -692,9 +690,7 @@ a {
   background: var(--color-white);
   padding: 1.125rem 1rem 1rem;
   border-left: 3px solid transparent;
-  transition:
-    background var(--transition-base),
-    border-color var(--transition-base);
+  transition: background var(--transition-base), border-color var(--transition-base);
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -804,9 +800,7 @@ a {
   border: 1px solid rgba(196, 168, 130, 0.35);
   padding: 8px 16px;
   margin-top: 10px;
-  transition:
-    background var(--transition-base),
-    color var(--transition-base);
+  transition: background var(--transition-base), color var(--transition-base);
 }
 
 .promo-card--featured:hover .promo-cta,
