@@ -640,14 +640,19 @@ a {
 
 /* Expands the tappable region by 10px in every direction
    with zero visual change — element appearance is unaffected */
-[data-secret-finger] {
+[data-secret-finger="1"] {
   position: relative;
 }
 
-[data-secret-finger]::before {
+[data-secret-finger="1"]::before {
   content: '';
   position: absolute;
   inset: -10px;
+}
+
+[data-secret-finger="2"] {
+  padding: 10px;
+  margin: -10px;
 }
 
 .hidden {
