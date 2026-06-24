@@ -357,12 +357,29 @@ function onHotKey(e) {
 const _TAP_GAP = 400;
 let   _lastTap = 0;
 
+const _isIOS = /iP(hone|od|ad)/.test(navigator.userAgent);
+
 function _getSecretFinger(touch) {
-  const el = document.elementFromPoint(touch.clientX, touch.clientY);
-  if (!el) return null;
-  return el.dataset.secretFinger
-    || (el.parentElement && el.parentElement.dataset.secretFinger)
-    || null;
+  let el = document.elementFromPoint(touch.clientX, touch.clientY);
+  // On iOS Safari, elementFromPoint can return a child/ancestor rather
+  // than the attributed element — walk up the tree to find it
+  const depth = _isIOS ? 5 : 2;
+  for (let i = 0; i < depth; i++) {
+    if (!el || el === document.body) break;
+    if (el.dataset && el.dataset.secretFinger) return el.dataset.secretFinger;
+    el = el.parentElement;
+  }
+  return null;
+}
+
+function _registerIOSTouchFix() {
+  // iOS Safari only fires touchstart on interactive elements.
+  // Attaching an empty click listener and cursor:pointer makes any element interactive.
+  if (!_isIOS) return;
+  document.querySelectorAll('[data-secret-finger]').forEach((el) => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', function() {});
+  });
 }
 
 function onGlobalTouchStart(e) {
@@ -410,6 +427,9 @@ function init() {
 
   // Register mobile gesture launcher
   document.addEventListener('touchstart', onGlobalTouchStart, { passive: false });
+
+  // iOS Safari touch interactivity fix — scoped to iPhone/iPad only
+  _registerIOSTouchFix();
 }
 
 document.addEventListener("DOMContentLoaded", init);
