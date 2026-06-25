@@ -133,7 +133,7 @@ a {
   gap: 12px;
 }
 
-.hero-divider span:not([data-secret-finger]) {
+.hero-divider span {
   display: block;
   width: 40px;
   height: 0.5px;
@@ -640,15 +640,18 @@ a {
   position: relative;
 }
 
-[data-secret-finger="1"]::before {
-  content: "";
-  position: absolute;
-  inset: -10px;
-}
-
 [data-secret-finger="2"] {
   padding: 10px;
   margin: -10px;
+}
+
+/* Expand tap areas on touch devices only — no effect on desktop */
+@media (hover: none) and (pointer: coarse) {
+  [data-secret-finger="1"]::before {
+    content: "";
+    position: absolute;
+    inset: -10px;
+  }
 }
 
 .hidden {

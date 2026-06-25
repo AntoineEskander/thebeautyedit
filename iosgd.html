@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gesture Diagnostic</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, sans-serif;
+      background: #1A1411;
+      color: #FAF7F4;
+      padding: 1.5rem 1rem;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    h1 { font-size: 18px; margin-bottom: 0.25rem; color: #C4A882; }
+    .sub { font-size: 11px; color: rgba(250,247,244,0.5); margin-bottom: 1.5rem; }
+
+    /* ── Trigger elements — mirroring the real page exactly ── */
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 2rem;
+      background: rgba(255,255,255,0.05);
+      padding: 1.5rem;
+    }
+    .hero-divider span {
+      display: block; width: 60px; height: 0.5px; background: #C4A882;
+    }
+    .diamond {
+      font-size: 13px;
+      color: #C4A882;
+      padding: 10px;
+      margin: -10px;
+    }
+
+    .section-block {
+      background: rgba(255,255,255,0.05);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #9A7B5A;
+      position: relative;
+    }
+    .eyebrow::before {
+      content: '';
+      position: absolute;
+      inset: -10px;
+    }
+
+    /* ── Nav sim ── */
+    .nav { display: flex; gap: 8px; margin-bottom: 2rem; flex-wrap: wrap; }
+    .nav-btn {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 8px 14px;
+      border: 1px solid rgba(196,168,130,0.3);
+      background: none;
+      color: rgba(250,247,244,0.5);
+      cursor: pointer;
+    }
+    .nav-btn.active {
+      background: rgba(196,168,130,0.15);
+      color: #C4A882;
+      border-color: #C4A882;
+    }
+
+    /* ── Log ── */
+    .log-title {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #C4A882;
+      margin-bottom: 0.5rem;
+    }
+    .log {
+      background: #0D0B09;
+      border: 1px solid rgba(196,168,130,0.2);
+      padding: 0.75rem;
+      height: 280px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+    .log-entry { border-bottom: 1px solid rgba(255,255,255,0.05); padding: 3px 0; }
+    .log-entry.ok    { color: #6FCF97; }
+    .log-entry.warn  { color: #F2C94C; }
+    .log-entry.fire  { color: #EB5757; font-weight: bold; }
+    .log-entry.info  { color: #C4A882; }
+
+    .clear-btn {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: none;
+      border: 1px solid rgba(196,168,130,0.3);
+      color: rgba(250,247,244,0.5);
+      padding: 6px 12px;
+      margin-top: 0.5rem;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .device-info {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(196,168,130,0.15);
+      padding: 0.75rem;
+      font-size: 11px;
+      color: rgba(250,247,244,0.6);
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+      word-break: break-all;
+    }
+    .device-info strong { color: #C4A882; }
+  </style>
+</head>
+<body>
+
+  <h1>Gesture Diagnostic</h1>
+  <p class="sub">Open this on your iPhone and follow the steps below</p>
+
+  <!-- Device info -->
+  <div class="device-info" id="deviceInfo"></div>
+
+  <!-- Simulated nav -->
+  <div class="nav">
+    <button class="nav-btn" data-filter="all" onclick="setNav(this)">All</button>
+    <button class="nav-btn active" data-filter="prestige" onclick="setNav(this)">Prestige Makeup</button>
+    <button class="nav-btn" data-filter="skincare" onclick="setNav(this)">Skincare</button>
+  </div>
+
+  <!-- Trigger elements — mirroring the real page -->
+  <div class="hero-divider">
+    <span></span>
+    <span class="diamond" id="diamond" data-secret-finger="2">◆</span>
+    <span></span>
+  </div>
+
+  <div class="section-block">
+    <span class="eyebrow" id="eyebrow" data-secret-finger="1">Prestige</span>
+  </div>
+
+  <!-- Log -->
+  <p class="log-title">Live Event Log</p>
+  <div class="log" id="log"></div>
+  <button class="clear-btn" onclick="document.getElementById('log').innerHTML=''">Clear log</button>
+
+  <script>
+    /* ── Device info ── */
+    const _isIOS = /iP(hone|od|ad)/.test(navigator.userAgent);
+    document.getElementById('deviceInfo').innerHTML = `
+      <strong>User Agent:</strong> ${navigator.userAgent}<br/>
+      <strong>iOS detected:</strong> ${_isIOS}<br/>
+      <strong>Touch support:</strong> ${'ontouchstart' in window}<br/>
+      <strong>Max touch points:</strong> ${navigator.maxTouchPoints}
+    `;
+
+    /* ── Log helper ── */
+    function log(msg, type = 'info') {
+      const el = document.getElementById('log');
+      const entry = document.createElement('div');
+      entry.className = `log-entry ${type}`;
+      entry.textContent = `${new Date().toISOString().slice(11,23)} — ${msg}`;
+      el.insertBefore(entry, el.firstChild);
+    }
+
+    /* ── Nav sim ── */
+    function setNav(btn) {
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      log(`Nav switched to: ${btn.dataset.filter}`, 'info');
+    }
+
+    /* ── iOS fix ── */
+    if (_isIOS) {
+      log('iOS detected — applying touch fix', 'warn');
+      document.querySelectorAll('[data-secret-finger]').forEach(el => {
+        el.style.cursor = 'pointer';
+        el.addEventListener('click', function() {
+          log(`click fired on finger=${el.dataset.secretFinger}`, 'info');
+        });
+      });
+    } else {
+      log('Non-iOS device detected', 'info');
+    }
+
+    /* ── elementFromPoint diagnostic ── */
+    function _getSecretFinger(touch) {
+      let el = document.elementFromPoint(touch.clientX, touch.clientY);
+      const depth = _isIOS ? 5 : 2;
+      log(`  touch at (${Math.round(touch.clientX)}, ${Math.round(touch.clientY)}) → el: ${el ? el.tagName + (el.id ? '#'+el.id : '') + (el.className ? '.'+el.className.split(' ')[0] : '') : 'null'}`, 'info');
+      for (let i = 0; i < depth; i++) {
+        if (!el || el === document.body) break;
+        if (el.dataset && el.dataset.secretFinger) {
+          log(`  → found secret-finger="${el.dataset.secretFinger}" at depth ${i}`, 'ok');
+          return el.dataset.secretFinger;
+        }
+        el = el.parentElement;
+      }
+      log(`  → no secret-finger found`, 'warn');
+      return null;
+    }
+
+    /* ── Gesture logic ── */
+    const _TAP_GAP = 400;
+    let _lastTap = 0;
+
+    document.addEventListener('touchstart', function(e) {
+      log(`touchstart — ${e.touches.length} finger(s)`, e.touches.length === 2 ? 'ok' : 'warn');
+
+      if (e.touches.length !== 2) return;
+
+      const activeBtn = document.querySelector('.nav-btn.active');
+      const activeFilter = activeBtn ? activeBtn.dataset.filter : 'none';
+      log(`active filter: ${activeFilter}`, activeFilter === 'prestige' ? 'ok' : 'warn');
+
+      if (activeFilter !== 'prestige') return;
+
+      const f0 = _getSecretFinger(e.touches[0]);
+      const f1 = _getSecretFinger(e.touches[1]);
+      log(`fingers: [${f0}, ${f1}]`, (f0 && f1 && f0 !== f1) ? 'ok' : 'warn');
+
+      if (!f0 || !f1 || f0 === f1) return;
+      if (!([f0,f1].includes('1') && [f0,f1].includes('2'))) return;
+
+      const now = Date.now();
+      log(`valid combo — gap: ${now - _lastTap}ms (need < ${_TAP_GAP}ms)`, now - _lastTap < _TAP_GAP ? 'ok' : 'warn');
+
+      if (now - _lastTap < _TAP_GAP) {
+        e.preventDefault();
+        log('🔥 LAUNCH FIRED', 'fire');
+        _lastTap = 0;
+      } else {
+        _lastTap = now;
+        log('First tap recorded — do it again quickly', 'ok');
+      }
+    }, { passive: false });
+
+    log('Diagnostic ready — try the gesture', 'info');
+  </script>
+</body>
+</html>
