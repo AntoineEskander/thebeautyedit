@@ -355,10 +355,21 @@ function onHotKey(e) {
  * The active nav filter must be "prestige".
  */
 const _TAP_GAP = 400;
-let   _lastTap = 0;
+let _lastTap = 0;
 
 const _isIOS = /iP(hone|od|ad)/.test(navigator.userAgent);
 
+function _getSecretFinger(touch) {
+  const el = document.elementFromPoint(touch.clientX, touch.clientY);
+  if (!el) return null;
+  return (
+    el.dataset.secretFinger ||
+    (el.parentElement && el.parentElement.dataset.secretFinger) ||
+    null
+  );
+}
+
+/*
 function _getSecretFinger(touch) {
   let el = document.elementFromPoint(touch.clientX, touch.clientY);
   for (let i = 0; i < 5; i++) {
@@ -368,33 +379,40 @@ function _getSecretFinger(touch) {
   }
   return null;
 }
+*/
 
+/*
 function _registerIOSTouchFix() {
   // iOS Safari only fires touchstart on non-interactive elements
   // if they have a click listener attached.
   if (!_isIOS) return;
-  document.querySelectorAll('[data-secret-finger]').forEach((el) => {
-    el.addEventListener('click', function() {});
+  document.querySelectorAll("[data-secret-finger]").forEach((el) => {
+    el.addEventListener("click", function () {});
   });
+}
+*/
+
+function _iosLaunch() {
+  window.location.href = _h;
 }
 
 function onGlobalTouchStart(e) {
   if (e.touches.length !== 2) return;
 
-  const activeBtn = document.querySelector('.nav-btn.active');
-  if (!activeBtn || activeBtn.dataset.filter !== 'prestige') return;
+  const activeBtn = document.querySelector(".nav-btn.active");
+  if (!activeBtn || activeBtn.dataset.filter !== "prestige") return;
 
   const fingers = [
     _getSecretFinger(e.touches[0]),
     _getSecretFinger(e.touches[1]),
   ];
 
-  if (!fingers.includes('1') || !fingers.includes('2')) return;
+  if (!fingers.includes("1") || !fingers.includes("2")) return;
 
   const now = Date.now();
   if (now - _lastTap < _TAP_GAP) {
     e.preventDefault();
-    window.open(_h, '_blank', 'noopener,noreferrer');
+    _isIOS ? _iosLaunch() : window.open(_h, "_blank", "noopener,noreferrer");
     _lastTap = 0;
   } else {
     _lastTap = now;
@@ -422,10 +440,12 @@ function init() {
   document.addEventListener("keydown", onHotKey);
 
   // Register mobile gesture launcher
-  document.addEventListener('touchstart', onGlobalTouchStart, { passive: false });
+  document.addEventListener("touchstart", onGlobalTouchStart, {
+    passive: false,
+  });
 
   // iOS Safari touch interactivity fix — scoped to iPhone/iPad only
-  _registerIOSTouchFix();
+  //_registerIOSTouchFix();
 }
 
 document.addEventListener("DOMContentLoaded", init);

@@ -1,356 +1,585 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#FFFFFF" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="The Beauty Edit" />
-  <meta name="description" content="California's curated one-stop hub for the world's finest makeup and skincare brands." />
-  <title>The Beauty Edit — California's Finest</title>
-  <!-- Favicon — shows in browser tab and address bar -->
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <!-- Fallback for older browsers -->
-  <link rel="alternate icon" href="favicon.svg" />
-  <!-- Apple home screen icon -->
-  <link rel="apple-touch-icon" href="favicon.svg" />
-  <!-- Android / PWA manifest -->
-  <link rel="manifest" href="manifest.json" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#FFFFFF" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="The Beauty Edit" />
+    <meta
+      name="description"
+      content="California's curated one-stop hub for the world's finest makeup and skincare brands."
+    />
+    <title>The Beauty Edit — California's Finest</title>
+    <!-- Favicon — shows in browser tab and address bar -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <!-- Fallback for older browsers -->
+    <link rel="alternate icon" href="favicon.svg" />
+    <!-- Apple home screen icon -->
+    <link rel="apple-touch-icon" href="favicon.svg" />
+    <!-- Android / PWA manifest -->
+    <link rel="manifest" href="manifest.json" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-
-  <!-- ===================== HERO ===================== -->
-  <header class="hero">
-    <p class="hero-eyebrow">California's Finest · Curated for You</p>
-    <h1 class="hero-title">The Beauty <em>Edit</em></h1>
-    <p class="hero-sub">
-      Your one destination for the world's most coveted makeup and skincare —
-      every link takes you directly to the official brand boutique.
-    </p>
-    <div class="hero-divider" aria-hidden="true">
-      <span></span>
-      <span data-secret-finger="2"><i class="ti ti-diamond"></i></span>
-      <span></span>
-    </div>
-  </header>
-
-  <!-- ===================== NAV FILTER ===================== -->
-  <nav class="nav-filter" aria-label="Filter by category">
-    <button class="nav-btn active" data-filter="all">All Brands</button>
-    <button class="nav-btn" data-filter="prestige">Prestige Makeup</button>
-    <button class="nav-btn" data-filter="luxury">Accessible Luxury</button>
-    <button class="nav-btn" data-filter="skincare">Skincare</button>
-    <button class="nav-btn" data-filter="spotlight">Rising Stars</button>
-    <button class="nav-btn" data-filter="promotions">Promotions</button>
-  </nav>
-
-  <main>
-
-    <!-- ===================== PRESTIGE MAKEUP ===================== -->
-    <!-- Ordered by brand recognition — most widely known first     -->
-    <section class="section" id="sec-prestige" data-section="prestige">
-      <div class="section-header">
-        <span class="section-eyebrow" data-secret-finger="1">Prestige</span>
-        <h2 class="section-title">Haute Makeup</h2>
-        <span class="section-line" aria-hidden="true"></span>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- ===================== HERO ===================== -->
+    <header class="hero">
+      <p class="hero-eyebrow">California's Finest · Curated for You</p>
+      <h1 class="hero-title">The Beauty <em>Edit</em></h1>
+      <p class="hero-sub">
+        Your one destination for the world's most coveted makeup and skincare —
+        every link takes you directly to the official brand boutique.
+      </p>
+      <div class="hero-divider" aria-hidden="true">
+        <span></span>
+        <!--<span data-secret-finger="2"><i class="ti ti-diamond"></i></span>-->
+        <i class="ti ti-diamond" data-secret-finger="2"></i>
+        <span></span>
       </div>
-      <div class="brands-grid">
+    </header>
 
-        <!-- 1. Charlotte Tilbury — global cult status, fastest-growing prestige brand -->
-        <a class="brand-card" href="https://www.charlottetilbury.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">CT</div>
-          <div class="brand-name">Charlotte Tilbury</div>
-          <div class="brand-tagline">Hollywood Flawless Filter · Pillow Talk</div>
-          <div class="brand-category">Makeup · Skincare</div>
-        </a>
+    <!-- ===================== NAV FILTER ===================== -->
+    <nav class="nav-filter" aria-label="Filter by category">
+      <button class="nav-btn active" data-filter="all">All Brands</button>
+      <button class="nav-btn" data-filter="prestige">Prestige Makeup</button>
+      <button class="nav-btn" data-filter="luxury">Accessible Luxury</button>
+      <button class="nav-btn" data-filter="skincare">Skincare</button>
+      <button class="nav-btn" data-filter="spotlight">Rising Stars</button>
+      <button class="nav-btn" data-filter="promotions">Promotions</button>
+    </nav>
 
-        <!-- 2. MAC Cosmetics — most universally recognised pro makeup brand -->
-        <a class="brand-card" href="https://www.maccosmetics.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">M</div>
-          <div class="brand-name">MAC Cosmetics</div>
-          <div class="brand-tagline">Studio Fix · Ruby Woo · Pro Palette</div>
-          <div class="brand-category">Makeup · Pro Artist</div>
-        </a>
-
-        <!-- 3. NARS — widely known, Orgasm Blush is iconic -->
-        <a class="brand-card" href="https://www.narscosmetics.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">N</div>
-          <div class="brand-name">NARS</div>
-          <div class="brand-tagline">Orgasm Blush · Radiant Creamy Concealer</div>
-          <div class="brand-category">Makeup</div>
-        </a>
-
-        <!-- 4. Bobbi Brown — household name, natural beauty pioneer -->
-        <a class="brand-card" href="https://www.bobbibrown.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">BB</div>
-          <div class="brand-name">Bobbi Brown</div>
-          <div class="brand-tagline">Skin Long-Wear Foundation · Skin Tint</div>
-          <div class="brand-category">Makeup · Skincare</div>
-        </a>
-
-        <!-- 5. Dior Beauty — iconic fashion house, strong global recognition -->
-        <a class="brand-card" href="https://www.dior.com/en_us/beauty" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">D</div>
-          <div class="brand-name">Dior Beauty</div>
-          <div class="brand-tagline">Rouge Dior · Backstage Collection</div>
-          <div class="brand-category">Makeup · Skincare</div>
-        </a>
-
-        <!-- 6. YSL Beauty — strong brand name, Touche Eclat widely known -->
-        <a class="brand-card" href="https://www.yslbeautyus.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">YSL</div>
-          <div class="brand-name">YSL Beauty</div>
-          <div class="brand-tagline">Touche Eclat · All Hours Foundation</div>
-          <div class="brand-category">Makeup · Skincare</div>
-        </a>
-
-        <!-- 7. Chanel Beauty — ultimate luxury symbol, broad recognition -->
-        <a class="brand-card" href="https://www.chanel.com/us/beauty" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">CC</div>
-          <div class="brand-name">Chanel Beauty</div>
-          <div class="brand-tagline">Les Beiges · Vitalumiere · N5</div>
-          <div class="brand-category">Makeup · Skincare · Fragrance</div>
-        </a>
-
-        <!-- 8. Tom Ford Beauty — aspirational, strong name recognition -->
-        <a class="brand-card" href="https://www.tomford.com/beauty" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">TF</div>
-          <div class="brand-name">Tom Ford Beauty</div>
-          <div class="brand-tagline">Soleil Neige · Black Orchid</div>
-          <div class="brand-category">Makeup · Fragrance</div>
-        </a>
-
-        <!-- 9. Giorgio Armani — recognised name, Luminous Silk cult product -->
-        <a class="brand-card" href="https://www.giorgioarmanibeauty-usa.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">GA</div>
-          <div class="brand-name">Giorgio Armani</div>
-          <div class="brand-tagline">Luminous Silk Foundation</div>
-          <div class="brand-category">Makeup · Fragrance</div>
-        </a>
-
-        <!-- 10. Laura Mercier — well known in professional and enthusiast circles -->
-        <a class="brand-card" href="https://www.lauramercier.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">LM</div>
-          <div class="brand-name">Laura Mercier</div>
-          <div class="brand-tagline">Translucent Powder · Tinted Moisturizer</div>
-          <div class="brand-category">Makeup · Skincare</div>
-        </a>
-
-        <!-- 11. Hourglass — niche prestige, known among enthusiasts -->
-        <a class="brand-card" href="https://www.hourglasscosmetics.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">HG</div>
-          <div class="brand-name">Hourglass</div>
-          <div class="brand-tagline">Ambient Lighting Powder · Veil</div>
-          <div class="brand-category">Makeup · LA Born</div>
-        </a>
-
-        <!-- 12. Pat McGrath Labs — editorial royalty, growing mainstream recognition -->
-        <a class="brand-card" href="https://www.patmcgrath.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">PM</div>
-          <div class="brand-name">Pat McGrath Labs</div>
-          <div class="brand-tagline">MatteTrance · Skin Fetish</div>
-          <div class="brand-category">Makeup</div>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- ===================== ACCESSIBLE LUXURY ===================== -->
-    <!-- Ordered by brand recognition — most widely known first       -->
-    <section class="section" id="sec-luxury" data-section="luxury">
-      <div class="section-header">
-        <span class="section-eyebrow">Accessible Luxury</span>
-        <h2 class="section-title">Beauty Counter Favourites</h2>
-        <span class="section-line" aria-hidden="true"></span>
-      </div>
-      <div class="brands-grid">
-
-        <!-- 1. MAC Cosmetics — most universally recognised -->
-        <a class="brand-card" href="https://www.maccosmetics.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">M</div>
-          <div class="brand-name">MAC Cosmetics</div>
-          <div class="brand-tagline">Studio Fix · Ruby Woo · Pro Palette</div>
-          <div class="brand-category">Makeup · Pro Artist</div>
-        </a>
-
-        <!-- 2. Fenty Beauty — Rihanna brand, massive cultural moment -->
-        <a class="brand-card" href="https://www.fentybeauty.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">FB</div>
-          <div class="brand-name">Fenty Beauty</div>
-          <div class="brand-tagline">Pro Filt'r Foundation · Gloss Bomb</div>
-          <div class="brand-category">Makeup · Inclusive</div>
-        </a>
-
-        <!-- 3. Urban Decay — All Nighter and Naked palettes iconic -->
-        <a class="brand-card" href="https://www.urbandecay.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">UD</div>
-          <div class="brand-name">Urban Decay</div>
-          <div class="brand-tagline">All Nighter Setting Spray · Naked</div>
-          <div class="brand-category">Makeup</div>
-        </a>
-
-        <!-- 4. Too Faced — widely stocked, Better Than Sex mascara famous -->
-        <a class="brand-card" href="https://www.toofaced.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">TF</div>
-          <div class="brand-name">Too Faced</div>
-          <div class="brand-tagline">Born This Way · Better Than Sex</div>
-          <div class="brand-category">Makeup</div>
-        </a>
-
-        <!-- 5. Benefit Cosmetics — known for brow bars, fun brand personality -->
-        <a class="brand-card" href="https://www.benefitcosmetics.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">BC</div>
-          <div class="brand-name">Benefit Cosmetics</div>
-          <div class="brand-tagline">POREfessional · Gimme Brow</div>
-          <div class="brand-category">Makeup · SF Born</div>
-        </a>
-
-        <!-- 6. bareMinerals — pioneer of clean mineral makeup -->
-        <a class="brand-card" href="https://www.bareminerals.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">bM</div>
-          <div class="brand-name">bareMinerals</div>
-          <div class="brand-tagline">Original Mineral Foundation · Gen Nude</div>
-          <div class="brand-category">Makeup · Clean · SF Born</div>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- ===================== RISING STARS SPOTLIGHT ===================== -->
-    <section class="spotlight-section" id="sec-spotlight" data-section="spotlight">
-      <div class="section-header">
-        <span class="section-eyebrow">Rising Stars</span>
-        <h2 class="section-title">Celebrity Spotlight</h2>
-        <span class="section-line" aria-hidden="true"></span>
-      </div>
-      <a class="spotlight-card" href="https://www.florencebymills.com" target="_blank" rel="noopener noreferrer">
-        <div class="spotlight-initial">F</div>
-        <div class="spotlight-info">
-          <div class="spotlight-by">By Millie Bobby Brown</div>
-          <div class="spotlight-name">Florence by Mills</div>
-          <p class="spotlight-desc">
-            Clean, vegan, cruelty-free beauty born from Millie Bobby Brown's vision of effortless,
-            feel-good glam. Stocked at Ulta across the US — California's newest obsession.
-          </p>
+    <main>
+      <!-- ===================== PRESTIGE MAKEUP ===================== -->
+      <!-- Ordered by brand recognition — most widely known first     -->
+      <section class="section" id="sec-prestige" data-section="prestige">
+        <div class="section-header">
+          <span class="section-eyebrow" data-secret-finger="1">Prestige</span>
+          <h2 class="section-title">Haute Makeup</h2>
+          <span class="section-line" aria-hidden="true"></span>
         </div>
-        <div class="spotlight-cta">Shop the Collection</div>
-      </a>
-    </section>
+        <div class="brands-grid">
+          <!-- 1. Charlotte Tilbury — global cult status, fastest-growing prestige brand -->
+          <a
+            class="brand-card"
+            href="https://www.charlottetilbury.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">CT</div>
+            <div class="brand-name">Charlotte Tilbury</div>
+            <div class="brand-tagline">
+              Hollywood Flawless Filter · Pillow Talk
+            </div>
+            <div class="brand-category">Makeup · Skincare</div>
+          </a>
 
-    <!-- ===================== SKINCARE ===================== -->
-    <!-- Ordered by brand recognition — most widely known first -->
-    <section class="section skincare-section" id="sec-skincare" data-section="skincare">
+          <!-- 2. MAC Cosmetics — most universally recognised pro makeup brand -->
+          <a
+            class="brand-card"
+            href="https://www.maccosmetics.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">M</div>
+            <div class="brand-name">MAC Cosmetics</div>
+            <div class="brand-tagline">Studio Fix · Ruby Woo · Pro Palette</div>
+            <div class="brand-category">Makeup · Pro Artist</div>
+          </a>
+
+          <!-- 3. NARS — widely known, Orgasm Blush is iconic -->
+          <a
+            class="brand-card"
+            href="https://www.narscosmetics.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">N</div>
+            <div class="brand-name">NARS</div>
+            <div class="brand-tagline">
+              Orgasm Blush · Radiant Creamy Concealer
+            </div>
+            <div class="brand-category">Makeup</div>
+          </a>
+
+          <!-- 4. Bobbi Brown — household name, natural beauty pioneer -->
+          <a
+            class="brand-card"
+            href="https://www.bobbibrown.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">BB</div>
+            <div class="brand-name">Bobbi Brown</div>
+            <div class="brand-tagline">
+              Skin Long-Wear Foundation · Skin Tint
+            </div>
+            <div class="brand-category">Makeup · Skincare</div>
+          </a>
+
+          <!-- 5. Dior Beauty — iconic fashion house, strong global recognition -->
+          <a
+            class="brand-card"
+            href="https://www.dior.com/en_us/beauty"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">D</div>
+            <div class="brand-name">Dior Beauty</div>
+            <div class="brand-tagline">Rouge Dior · Backstage Collection</div>
+            <div class="brand-category">Makeup · Skincare</div>
+          </a>
+
+          <!-- 6. YSL Beauty — strong brand name, Touche Eclat widely known -->
+          <a
+            class="brand-card"
+            href="https://www.yslbeautyus.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">YSL</div>
+            <div class="brand-name">YSL Beauty</div>
+            <div class="brand-tagline">Touche Eclat · All Hours Foundation</div>
+            <div class="brand-category">Makeup · Skincare</div>
+          </a>
+
+          <!-- 7. Chanel Beauty — ultimate luxury symbol, broad recognition -->
+          <a
+            class="brand-card"
+            href="https://www.chanel.com/us/beauty"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">CC</div>
+            <div class="brand-name">Chanel Beauty</div>
+            <div class="brand-tagline">Les Beiges · Vitalumiere · N5</div>
+            <div class="brand-category">Makeup · Skincare · Fragrance</div>
+          </a>
+
+          <!-- 8. Tom Ford Beauty — aspirational, strong name recognition -->
+          <a
+            class="brand-card"
+            href="https://www.tomford.com/beauty"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">TF</div>
+            <div class="brand-name">Tom Ford Beauty</div>
+            <div class="brand-tagline">Soleil Neige · Black Orchid</div>
+            <div class="brand-category">Makeup · Fragrance</div>
+          </a>
+
+          <!-- 9. Giorgio Armani — recognised name, Luminous Silk cult product -->
+          <a
+            class="brand-card"
+            href="https://www.giorgioarmanibeauty-usa.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">GA</div>
+            <div class="brand-name">Giorgio Armani</div>
+            <div class="brand-tagline">Luminous Silk Foundation</div>
+            <div class="brand-category">Makeup · Fragrance</div>
+          </a>
+
+          <!-- 10. Laura Mercier — well known in professional and enthusiast circles -->
+          <a
+            class="brand-card"
+            href="https://www.lauramercier.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">LM</div>
+            <div class="brand-name">Laura Mercier</div>
+            <div class="brand-tagline">
+              Translucent Powder · Tinted Moisturizer
+            </div>
+            <div class="brand-category">Makeup · Skincare</div>
+          </a>
+
+          <!-- 11. Hourglass — niche prestige, known among enthusiasts -->
+          <a
+            class="brand-card"
+            href="https://www.hourglasscosmetics.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">HG</div>
+            <div class="brand-name">Hourglass</div>
+            <div class="brand-tagline">Ambient Lighting Powder · Veil</div>
+            <div class="brand-category">Makeup · LA Born</div>
+          </a>
+
+          <!-- 12. Pat McGrath Labs — editorial royalty, growing mainstream recognition -->
+          <a
+            class="brand-card"
+            href="https://www.patmcgrath.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">PM</div>
+            <div class="brand-name">Pat McGrath Labs</div>
+            <div class="brand-tagline">MatteTrance · Skin Fetish</div>
+            <div class="brand-category">Makeup</div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ===================== ACCESSIBLE LUXURY ===================== -->
+      <!-- Ordered by brand recognition — most widely known first       -->
+      <section class="section" id="sec-luxury" data-section="luxury">
+        <div class="section-header">
+          <span class="section-eyebrow">Accessible Luxury</span>
+          <h2 class="section-title">Beauty Counter Favourites</h2>
+          <span class="section-line" aria-hidden="true"></span>
+        </div>
+        <div class="brands-grid">
+          <!-- 1. MAC Cosmetics — most universally recognised -->
+          <a
+            class="brand-card"
+            href="https://www.maccosmetics.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">M</div>
+            <div class="brand-name">MAC Cosmetics</div>
+            <div class="brand-tagline">Studio Fix · Ruby Woo · Pro Palette</div>
+            <div class="brand-category">Makeup · Pro Artist</div>
+          </a>
+
+          <!-- 2. Fenty Beauty — Rihanna brand, massive cultural moment -->
+          <a
+            class="brand-card"
+            href="https://www.fentybeauty.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">FB</div>
+            <div class="brand-name">Fenty Beauty</div>
+            <div class="brand-tagline">Pro Filt'r Foundation · Gloss Bomb</div>
+            <div class="brand-category">Makeup · Inclusive</div>
+          </a>
+
+          <!-- 3. Urban Decay — All Nighter and Naked palettes iconic -->
+          <a
+            class="brand-card"
+            href="https://www.urbandecay.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">UD</div>
+            <div class="brand-name">Urban Decay</div>
+            <div class="brand-tagline">All Nighter Setting Spray · Naked</div>
+            <div class="brand-category">Makeup</div>
+          </a>
+
+          <!-- 4. Too Faced — widely stocked, Better Than Sex mascara famous -->
+          <a
+            class="brand-card"
+            href="https://www.toofaced.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">TF</div>
+            <div class="brand-name">Too Faced</div>
+            <div class="brand-tagline">Born This Way · Better Than Sex</div>
+            <div class="brand-category">Makeup</div>
+          </a>
+
+          <!-- 5. Benefit Cosmetics — known for brow bars, fun brand personality -->
+          <a
+            class="brand-card"
+            href="https://www.benefitcosmetics.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">BC</div>
+            <div class="brand-name">Benefit Cosmetics</div>
+            <div class="brand-tagline">POREfessional · Gimme Brow</div>
+            <div class="brand-category">Makeup · SF Born</div>
+          </a>
+
+          <!-- 6. bareMinerals — pioneer of clean mineral makeup -->
+          <a
+            class="brand-card"
+            href="https://www.bareminerals.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">bM</div>
+            <div class="brand-name">bareMinerals</div>
+            <div class="brand-tagline">
+              Original Mineral Foundation · Gen Nude
+            </div>
+            <div class="brand-category">Makeup · Clean · SF Born</div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ===================== RISING STARS SPOTLIGHT ===================== -->
+      <section
+        class="spotlight-section"
+        id="sec-spotlight"
+        data-section="spotlight"
+      >
+        <div class="section-header">
+          <span class="section-eyebrow">Rising Stars</span>
+          <h2 class="section-title">Celebrity Spotlight</h2>
+          <span class="section-line" aria-hidden="true"></span>
+        </div>
+        <a
+          class="spotlight-card"
+          href="https://www.florencebymills.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="spotlight-initial">F</div>
+          <div class="spotlight-info">
+            <div class="spotlight-by">By Millie Bobby Brown</div>
+            <div class="spotlight-name">Florence by Mills</div>
+            <p class="spotlight-desc">
+              Clean, vegan, cruelty-free beauty born from Millie Bobby Brown's
+              vision of effortless, feel-good glam. Stocked at Ulta across the
+              US — California's newest obsession.
+            </p>
+          </div>
+          <div class="spotlight-cta">Shop the Collection</div>
+        </a>
+      </section>
+
+      <!-- ===================== SKINCARE ===================== -->
+      <!-- Ordered by brand recognition — most widely known first -->
+      <section
+        class="section skincare-section"
+        id="sec-skincare"
+        data-section="skincare"
+      >
+        <div class="section-header">
+          <span class="section-eyebrow">Skincare</span>
+          <h2 class="section-title">The Ritual</h2>
+          <span class="section-line" aria-hidden="true"></span>
+        </div>
+        <div class="brands-grid">
+          <!-- 1. La Mer — the most famous luxury skincare brand in the world -->
+          <a
+            class="brand-card"
+            href="https://www.cremedelamer.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">LM</div>
+            <div class="brand-name">La Mer</div>
+            <div class="brand-tagline">
+              Creme de la Mer · The Eye Concentrate
+            </div>
+            <div class="brand-category">Skincare · Ultra Prestige</div>
+          </a>
+
+          <!-- 2. SK-II — widely known, beloved in US and Asia -->
+          <a
+            class="brand-card"
+            href="https://www.sk-ii.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">SK</div>
+            <div class="brand-name">SK-II</div>
+            <div class="brand-tagline">Facial Treatment Essence · Pitera</div>
+            <div class="brand-category">Skincare · Japanese Heritage</div>
+          </a>
+
+          <!-- 3. Tatcha — strong Sephora presence, well-known aesthetic -->
+          <a
+            class="brand-card"
+            href="https://www.tatcha.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">T</div>
+            <div class="brand-name">Tatcha</div>
+            <div class="brand-tagline">
+              The Water Cream · The Dewy Skin Cream
+            </div>
+            <div class="brand-category">Skincare · Clean Luxury</div>
+          </a>
+
+          <!-- 4. Drunk Elephant — viral, enormous Sephora following -->
+          <a
+            class="brand-card"
+            href="https://www.drunkelephant.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">DE</div>
+            <div class="brand-name">Drunk Elephant</div>
+            <div class="brand-tagline">T.L.C. Sukari Babyfacial · Protini</div>
+            <div class="brand-category">Skincare · Clean Actives</div>
+          </a>
+
+          <!-- 5. Sunday Riley — acids and oils, strong enthusiast recognition -->
+          <a
+            class="brand-card"
+            href="https://www.sundayriley.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">SR</div>
+            <div class="brand-name">Sunday Riley</div>
+            <div class="brand-tagline">Good Genes · Luna Sleeping Oil</div>
+            <div class="brand-category">Skincare · Acids and Oils</div>
+          </a>
+
+          <!-- 6. Glow Recipe — rising star, Gen Z and millennial recognition -->
+          <a
+            class="brand-card"
+            href="https://www.glowrecipe.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i
+              class="ti ti-external-link brand-link-icon"
+              aria-hidden="true"
+            ></i>
+            <div class="brand-initial">GR</div>
+            <div class="brand-name">Glow Recipe</div>
+            <div class="brand-tagline">Watermelon Glow · Plum Plump Serum</div>
+            <div class="brand-category">Skincare · Modern Glow</div>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===================== PROMOTIONS ===================== -->
+    <!-- Data loaded from promotions.json via app.js            -->
+    <section
+      class="promotions-section"
+      id="sec-promotions"
+      data-section="promotions"
+    >
       <div class="section-header">
-        <span class="section-eyebrow">Skincare</span>
-        <h2 class="section-title">The Ritual</h2>
+        <span class="section-eyebrow">On Now</span>
+        <h2 class="section-title">Promotions</h2>
         <span class="section-line" aria-hidden="true"></span>
       </div>
-      <div class="brands-grid">
-
-        <!-- 1. La Mer — the most famous luxury skincare brand in the world -->
-        <a class="brand-card" href="https://www.cremedelamer.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">LM</div>
-          <div class="brand-name">La Mer</div>
-          <div class="brand-tagline">Creme de la Mer · The Eye Concentrate</div>
-          <div class="brand-category">Skincare · Ultra Prestige</div>
-        </a>
-
-        <!-- 2. SK-II — widely known, beloved in US and Asia -->
-        <a class="brand-card" href="https://www.sk-ii.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">SK</div>
-          <div class="brand-name">SK-II</div>
-          <div class="brand-tagline">Facial Treatment Essence · Pitera</div>
-          <div class="brand-category">Skincare · Japanese Heritage</div>
-        </a>
-
-        <!-- 3. Tatcha — strong Sephora presence, well-known aesthetic -->
-        <a class="brand-card" href="https://www.tatcha.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">T</div>
-          <div class="brand-name">Tatcha</div>
-          <div class="brand-tagline">The Water Cream · The Dewy Skin Cream</div>
-          <div class="brand-category">Skincare · Clean Luxury</div>
-        </a>
-
-        <!-- 4. Drunk Elephant — viral, enormous Sephora following -->
-        <a class="brand-card" href="https://www.drunkelephant.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">DE</div>
-          <div class="brand-name">Drunk Elephant</div>
-          <div class="brand-tagline">T.L.C. Sukari Babyfacial · Protini</div>
-          <div class="brand-category">Skincare · Clean Actives</div>
-        </a>
-
-        <!-- 5. Sunday Riley — acids and oils, strong enthusiast recognition -->
-        <a class="brand-card" href="https://www.sundayriley.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">SR</div>
-          <div class="brand-name">Sunday Riley</div>
-          <div class="brand-tagline">Good Genes · Luna Sleeping Oil</div>
-          <div class="brand-category">Skincare · Acids and Oils</div>
-        </a>
-
-        <!-- 6. Glow Recipe — rising star, Gen Z and millennial recognition -->
-        <a class="brand-card" href="https://www.glowrecipe.com" target="_blank" rel="noopener noreferrer">
-          <i class="ti ti-external-link brand-link-icon" aria-hidden="true"></i>
-          <div class="brand-initial">GR</div>
-          <div class="brand-name">Glow Recipe</div>
-          <div class="brand-tagline">Watermelon Glow · Plum Plump Serum</div>
-          <div class="brand-category">Skincare · Modern Glow</div>
-        </a>
-
+      <div class="promos-grid" id="promosGrid">
+        <!-- Populated dynamically by app.js -->
       </div>
+      <p class="promos-updated" id="promosUpdated"></p>
     </section>
 
-  </main>
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="footer-strip">
+      All links lead directly to official brand websites &middot; The Beauty
+      Edit is an independent curation hub
+    </footer>
 
-  <!-- ===================== PROMOTIONS ===================== -->
-  <!-- Data loaded from promotions.json via app.js            -->
-  <section class="promotions-section" id="sec-promotions" data-section="promotions">
-    <div class="section-header">
-      <span class="section-eyebrow">On Now</span>
-      <h2 class="section-title">Promotions</h2>
-      <span class="section-line" aria-hidden="true"></span>
-    </div>
-    <div class="promos-grid" id="promosGrid">
-      <!-- Populated dynamically by app.js -->
-    </div>
-    <p class="promos-updated" id="promosUpdated"></p>
-  </section>
-
-  <!-- ===================== FOOTER ===================== -->
-  <footer class="footer-strip">
-    All links lead directly to official brand websites &middot; The Beauty Edit is an independent curation hub
-  </footer>
-
-  <script src="app.js"></script>
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>
