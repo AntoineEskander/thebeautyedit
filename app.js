@@ -353,11 +353,16 @@ function onHotKey(e) {
  * Both fingers must be down at the same time.
  * That two-finger touch must happen twice within _TAP_GAP ms.
  * The active nav filter must be "prestige".
+ *
+ *iOS screen is too sensitive - that it seems like it sense the first tab as the fingers approaching the screen
+ *
  */
+const _isIOS = /iP(hone|od|ad)/.test(navigator.userAgent);
+const _isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
 const _TAP_GAP = 400;
 let _lastTap = 0;
 
-const _isIOS = /iP(hone|od|ad)/.test(navigator.userAgent);
 
 function _getSecretFinger(touch) {
   const el = document.elementFromPoint(touch.clientX, touch.clientY);
@@ -367,33 +372,6 @@ function _getSecretFinger(touch) {
     (el.parentElement && el.parentElement.dataset.secretFinger) ||
     null
   );
-}
-
-/*
-function _getSecretFinger(touch) {
-  let el = document.elementFromPoint(touch.clientX, touch.clientY);
-  for (let i = 0; i < 5; i++) {
-    if (!el || el === document.body) break;
-    if (el.dataset && el.dataset.secretFinger) return el.dataset.secretFinger;
-    el = el.parentElement;
-  }
-  return null;
-}
-*/
-
-/*
-function _registerIOSTouchFix() {
-  // iOS Safari only fires touchstart on non-interactive elements
-  // if they have a click listener attached.
-  if (!_isIOS) return;
-  document.querySelectorAll("[data-secret-finger]").forEach((el) => {
-    el.addEventListener("click", function () {});
-  });
-}
-*/
-
-function _iosLaunch() {
-  window.location.href = _h;
 }
 
 function onGlobalTouchStart(e) {
@@ -410,10 +388,15 @@ function onGlobalTouchStart(e) {
   if (!fingers.includes("1") || !fingers.includes("2")) return;
 
   const now = Date.now();
-  if (now - _lastTap < _TAP_GAP) {
+  const timeGap = now - _lastTap;
+  // Handling sensitive screens
+  if(timeGap < 50) return;
+  if (timeGap < _TAP_GAP) {
+	_lastTap = 0;
     e.preventDefault();
-    _isIOS ? _iosLaunch() : window.open(_h, "_blank", "noopener,noreferrer");
-    _lastTap = 0;
+    _isMobile
+      ? (window.location.href = _h)
+      : window.open(_h, "_blank", "noopener,noreferrer");
   } else {
     _lastTap = now;
   }
@@ -444,8 +427,7 @@ function init() {
     passive: false,
   });
 
-  // iOS Safari touch interactivity fix — scoped to iPhone/iPad only
-  //_registerIOSTouchFix();
+  //document.addEventListener("touchend", onGlobalTouchEnd);
 }
 
 document.addEventListener("DOMContentLoaded", init);
